@@ -21,7 +21,7 @@ function changeClicks(amt){
 }
 document.addEventListener("keydown", function(event){
   if(event.key = 'p'){
-    changeClicks(4999)
+    changeClicks(10000)
   }
 });
 function resetgame(){
@@ -77,7 +77,7 @@ function buy(item) {
       changeClicks(-500)
       workers += 1
       workercost = workercost*1.5
-      changeElementText('workerst','Worker (makes 1 autoclicker per 10 seconds): '+clicks+' Clicks')
+      changeElementText('workerst','Worker (makes 1 autoclicker per 10 seconds): '+workercost+' Clicks')
     }
   }
 }
