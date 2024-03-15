@@ -15,7 +15,7 @@ let workers = 0;
 let upg_x2clickers = false;
 // Keypress
 window.addEventListener("keypress", function(){
-  if(event.key = ']'){
+  if(event.key = 'p'){
     changeClicks(4999)
   }
 });
