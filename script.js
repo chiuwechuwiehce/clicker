@@ -14,7 +14,7 @@ let workers = 0;
 // Upgrade Vars
 let upg_x2clickers = false;
 // Keypress
-window.addEventListener("keypress", function(){
+window.addEventListener("keydown", function(event){
   if(event.key = 'p'){
     changeClicks(4999)
   }
