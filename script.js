@@ -74,7 +74,7 @@ function buy(item) {
   }
   if(item == 'worker'){
     if(clicks >= workercost){
-      changeClicks(-500)
+      changeClicks(-workercost)
       workers += 1
       workercost = Math.round(workercost*1.5)
       changeElementText('workerst','Worker (makes 1 autoclicker per 10 seconds): '+workercost+' Clicks')
