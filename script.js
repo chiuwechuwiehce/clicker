@@ -13,6 +13,12 @@ let workercost = 500;
 let workers = 0;
 // Upgrade Vars
 let upg_x2clickers = false;
+// Keypress
+window.addEventListener("keypress", function(){
+  if(event.key = ']'){
+    changeClicks(4999)
+  }
+});
 // Functions
 function changeClicks(amt){
   clicks += amt;
