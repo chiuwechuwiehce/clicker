@@ -13,6 +13,7 @@ let workercost = 500;
 let workers = 0;
 // Upgrade Vars
 let upg_x2clickers = false;
+let upg_x2workers = false;
 // Keypress
 // Functions
 function changeClicks(amt){
@@ -70,6 +71,13 @@ function buy(item) {
         curupgrade = 0
         changeElementText('upgrade','No Upgrades Yet!')
       }
+    } else if(curupgrade == 2){
+      if(clicks >= 7500){
+        changeClicks(-7500)
+        upg_x2workers = true
+        curupgrade = 0
+        changeElementText('upgrade','No Upgrades Yet!')
+      }
     }
   }
   if(item == 'worker'){
@@ -85,14 +93,17 @@ function ticker() {
   if(tentick == 10){
     tentick = 0;
     clickers += workers
+    if(upg_x2workers == true){
+      clickers += workers
+    }
     if(minutes == 6){
       if(rush == 0){
-        randrush = Math.random(1,10)
+        randrush = Math.random(1,5)
       } else {
         rush = 0;
         changeElementText('isrush','x2 Rush: None')
       }
-      if(randrush == 10){
+      if(randrush == 5){
         rush = 1;
         changeElementText('isrush','x2 Rush: Active')
       }
@@ -106,6 +117,10 @@ function ticker() {
   click(clickers)
   if(upg_x2clickers == true){
     click(clickers)
+  }
+  if(workers == 1){
+    curupgrade = 2
+    changeElementText('upgrade','x2 Worker Productivity: 7500 Clicks')
   }
   changeElementText('clickers','Autoclickers: '+clickers)
   changeElementText('cperclick','Clicks Per Click: '+cperclick)
