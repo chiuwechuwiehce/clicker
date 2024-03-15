@@ -9,6 +9,8 @@ let cperclickcost = 40;
 let tentick = 0;
 let minutes = 0;
 let curupgrade = 1;
+let workercost = 500;
+let workers = 0;
 // Upgrade Vars
 let upg_x2clickers = false;
 // Functions
@@ -63,11 +65,19 @@ function buy(item) {
         changeElementText('upgrade','No Upgrades Yet!')
       }
     }
+  } else if(item == 'worker'){
+    if(clicks >= workercost){
+      changeClicks(-500)
+      workers += 1
+      workercost = workercost*1.5
+      changeElementText('workerst','Worker (makes 1 autoclicker per 10 seconds): '+clicks+' Clicks')
+    }
   }
 }
 function ticker() {
   if(tentick == 10){
     tentick = 0;
+    clickers += workers
     if(minutes == 6){
       if(rush == 0){
         randrush = Math.random(1,10)
