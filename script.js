@@ -118,7 +118,7 @@ function ticker() {
   if(upg_x2clickers == true){
     click(clickers)
   }
-  if(workers == 1){
+  if(workers == 1 && curupgrade == 0){
     curupgrade = 2
     changeElementText('upgrade','x2 Worker Productivity: 7500 Clicks')
   }
