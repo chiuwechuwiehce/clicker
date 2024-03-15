@@ -120,7 +120,7 @@ function ticker() {
   }
 }
 function mticker(){
-  if(workers == 1 && curupgrade == 0){
+  if(workers >= 1 && curupgrade == 0 && upg_x2workers == false){
     curupgrade = 2
     changeElementText('upgrade','x2 Worker Productivity: 7500 Clicks')
   }
