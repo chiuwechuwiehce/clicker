@@ -14,16 +14,16 @@ let workers = 0;
 // Upgrade Vars
 let upg_x2clickers = false;
 // Keypress
-window.addEventListener("keydown", function(event){
-  if(event.key = 'p'){
-    changeClicks(4999)
-  }
-});
 // Functions
 function changeClicks(amt){
   clicks += amt;
   changeElementText('clickscounter', 'Clicks: ' + clicks)
 }
+document.addEventListener("keydown", function(event){
+  if(event.key = 'p'){
+    changeClicks(4999)
+  }
+});
 function resetgame(){
   changeClicks(-clicks)
   upg_x2clickers = false
