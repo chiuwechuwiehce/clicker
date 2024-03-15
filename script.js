@@ -109,6 +109,7 @@ function ticker() {
   }
   changeElementText('clickers','Autoclickers: '+clickers)
   changeElementText('cperclick','Clicks Per Click: '+cperclick)
+  changeElementText('workers','Workers: '+workers)
 }
 // Code
 setInterval("ticker()", 1000)
