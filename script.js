@@ -65,7 +65,8 @@ function buy(item) {
         changeElementText('upgrade','No Upgrades Yet!')
       }
     }
-  } else if(item == 'worker'){
+  }
+  if(item == 'worker'){
     if(clicks >= workercost){
       changeClicks(-500)
       workers += 1
