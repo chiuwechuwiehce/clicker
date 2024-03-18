@@ -42,6 +42,12 @@ function resetgame(){
 function changeElementText(id,text){
   document.getElementById(id).innerHTML = text
 }
+function hideElement(id){
+  document.getElementById(id).style.display = 'none'
+}
+function showElement(id){
+  document.getElementById(id).style.display = 'block'
+}
 function click(amt) {
   changeClicks(amt)
   if(rush == 1){
