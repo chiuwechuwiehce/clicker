@@ -135,5 +135,7 @@ function mticker(){
   changeElementText('workers','Workers: '+workers)
 }
 // Code
+hideElement(workerst)
+hideElement(workerbtn)
 setInterval("ticker()", 1000)
 setInterval("mticker()",1)
