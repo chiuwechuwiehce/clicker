@@ -42,12 +42,6 @@ function resetgame(){
 function changeElementText(id,text){
   document.getElementById(id).innerHTML = text
 }
-function hideElement(id){
-  document.getElementById(id).style.display = 'none'
-}
-function showElement(id){
-  document.getElementById(id).style.display = 'block'
-}
 function click(amt) {
   changeClicks(amt)
   if(rush == 1){
@@ -135,7 +129,5 @@ function mticker(){
   changeElementText('workers','Workers: '+workers)
 }
 // Code
-hideElement(workerst)
-hideElement(workerbtn)
 setInterval("ticker()", 1000)
 setInterval("mticker()",1)
