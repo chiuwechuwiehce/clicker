@@ -20,11 +20,6 @@ function changeClicks(amt){
   clicks += amt;
   changeElementText('clickscounter', 'Clicks: ' + clicks)
 }
-document.addEventListener("keydown", function(event){
-  if(event.key = 'p'){
-    changeClicks(10000)
-  }
-});
 function resetgame(){
   changeClicks(-clicks)
   upg_x2clickers = false
