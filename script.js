@@ -35,6 +35,7 @@ function resetgame(){
   workers = 0;
   upg_x2clickers = false;
   upg_x2workers = false;
+  window.location.reload();
 }
 function changeElementText(id,text){
   document.getElementById(id).innerHTML = text
@@ -86,6 +87,30 @@ function buy(item) {
     }
   }
 }
+
+function save(){
+  let num1 = clicks * 1432
+  let reg1 = num1.toString() + '|';
+  let num2 = clickers * 1289
+  let reg2 = num2.toString() + '|';
+  let num3 = cperclick * 1271
+  let reg3 = num3.toString();
+  let savecode = reg1 + reg2 + reg3;
+  changeElementText('savecode',savecode);
+}
+
+function load(){
+  let code = document.getElementById('inputload').value;
+  console.log(code)
+  let tablecode = code.split('|');
+  let c1 = tablecode[0];
+  let c2 = tablecode[1];
+  let c3 = tablecode[2];
+  clicks = Math.round(parseInt(c1) / 1432);
+  clickers = Math.round(parseInt(c2) / 1289);
+  cperclick = Math.round(parseInt(c3) / 1271);
+}
+
 function ticker() {
   if(tentick == 10){
     tentick = 0;
