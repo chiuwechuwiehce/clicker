@@ -1,4 +1,38 @@
+
 html {
   height: 100%;
   width: 100%;
+  background-color: #292929;
+}
+
+.nbgtxt {
+  color: #d6d6d6;
+  font-family: 'Arial';
+}
+
+.btn {
+  
+}
+
+#clickimg {
+  width: 100px;
+  height: 50px;
+  cursor: pointer;
+}
+
+#olayclickimg {
+  color: #d6d6d6;
+  font-family: 'Arial';
+  font-size: 20px;
+  position: relative;
+  top: -18px;
+  left: -77px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
 }
