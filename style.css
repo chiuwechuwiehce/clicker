@@ -10,23 +10,59 @@ html {
   font-family: 'Arial';
 }
 
-.btn {
-  
-}
-
-#clickimg {
-  width: 100px;
-  height: 50px;
+.img {
+  width: 75px;
+  height: 37.5px;
   cursor: pointer;
 }
 
-#olayclickimg {
+.imgrs {
+  width: 130px;
+  height: 37.5px;
+  cursor: pointer;
+}
+
+.olayimgrs {
   color: #d6d6d6;
   font-family: 'Arial';
   font-size: 20px;
   position: relative;
-  top: -18px;
-  left: -77px;
+  top: -12px;
+  left: -125px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.olayimg {
+  color: #d6d6d6;
+  font-family: 'Arial';
+  font-size: 20px;
+  position: relative;
+  top: -12px;
+  left: -63px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.solayimg {
+  color: #d6d6d6;
+  font-family: 'Arial';
+  font-size: 20px;
+  position: relative;
+  top: -12px;
+  left: -59px;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
