@@ -22,17 +22,19 @@ function changeClicks(amt){
 }
 function resetgame(){
   changeClicks(-clicks)
-  upg_x2clickers = false
-  rush = 0
-  cperclick = 1
-  clickers = 0
-  clickercost = 20
-  cperclickcost = 40
-  tentick = 0
-  minutes = 0
-  tick = 0
-  randrush = 0
-  curupgrade = 1
+  randrush = 0;
+  rush = 0;
+  cperclick = 1;
+  clickers = 0;
+  clickercost = 20;
+  cperclickcost = 40;
+  tentick = 0;
+  minutes = 0;
+  curupgrade = 1;
+  workercost = 500;
+  workers = 0;
+  upg_x2clickers = false;
+  upg_x2workers = false;
 }
 function changeElementText(id,text){
   document.getElementById(id).innerHTML = text
