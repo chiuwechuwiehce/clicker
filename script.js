@@ -1,40 +1,40 @@
-// Vars
-let randrush = 0;
-let rush = 0;
-let clicks = 0;
-let cperclick = 1;
-let clickers = 0;
-let clickercost = 20;
-let cperclickcost = 40;
-let tentick = 0;
-let minutes = 0;
-let curupgrade = 1;
-let workercost = 500;
-let workers = 0;
-// Upgrade Vars
-let upg_x2clickers = false;
-let upg_x2workers = false;
+function updateshoptext(){
+  changeElementText('workerst','Worker (makes 1 autoclicker per 10 seconds): '+workercost+' Clicks')
+  changeElementText('clickerst','Autoclicker: ' + clickercost + ' Clicks')
+  changeElementText('cperclickst','+1 Clicks Per Click: ' + cperclickcost + ' Clicks')
+}
+  // Vars
+  let randrush = 0;
+  let rush = 0;
+  let clicks = 0;
+  let cperclick = 1;
+  let clickers = 0;
+  let clickercost = 20;
+  let cperclickcost = 40;
+  let tentick = 0;
+  let minutes = 0;
+  let curupgrade = 1;
+  let workercost = 500;
+  let workers = 0;
+  // Upgrade Vars
+  let upg_x2clickers = false;
+  let upg_x2workers = false;
 // Keypress
+document.addEventListener("keypress", function onEvent(event) {
+    if (event.key === "z") {
+        click(cperclick)
+    }
+});
 // Functions
 function changeClicks(amt){
   clicks += amt;
   changeElementText('clickscounter', 'Clicks: ' + clicks)
 }
+function setClicks(amt){
+  clicks = amt;
+  changeElementText('clickscounter', 'Clicks: ' + clicks)
+}
 function resetgame(){
-  changeClicks(-clicks)
-  randrush = 0;
-  rush = 0;
-  cperclick = 1;
-  clickers = 0;
-  clickercost = 20;
-  cperclickcost = 40;
-  tentick = 0;
-  minutes = 0;
-  curupgrade = 1;
-  workercost = 500;
-  workers = 0;
-  upg_x2clickers = false;
-  upg_x2workers = false;
   window.location.reload();
 }
 function changeElementText(id,text){
@@ -91,11 +91,25 @@ function buy(item) {
 function save(){
   let num1 = clicks * 1432
   let reg1 = num1.toString() + '|';
-  let num2 = clickers * 1289
+  let num2 = clickers * 1432
   let reg2 = num2.toString() + '|';
-  let num3 = cperclick * 1271
-  let reg3 = num3.toString();
-  let savecode = reg1 + reg2 + reg3;
+  let num3 = cperclick * 1432
+  let reg3 = num3.toString() + '|';
+  let num4 = workers * 1432
+  let reg4 = num4.toString() + '|';
+  let num5 = upg_x2clickers * 909320
+  let reg5 = num5.toString() + '|';
+  let num6 = upg_x2workers * 909320
+  let reg6 = num6.toString() + '|';
+  let num7 = curupgrade * 909320
+  let reg7 = num7.toString() + '|';
+  let num8 = clickercost * 1432
+  let reg8 = num8.toString() + '|';
+  let num9 = cperclickcost * 1432
+  let reg9 = num9.toString() + '|';
+  let num10 = workercost * 1432
+  let reg10 = num10.toString();
+  let savecode = reg1 + reg2 + reg3 + reg4 + reg5 + reg6 + reg7 + reg8 + reg9 + reg10;
   changeElementText('savecode',savecode);
 }
 
@@ -106,9 +120,43 @@ function load(){
   let c1 = tablecode[0];
   let c2 = tablecode[1];
   let c3 = tablecode[2];
-  clicks = Math.round(parseInt(c1) / 1432);
-  clickers = Math.round(parseInt(c2) / 1289);
-  cperclick = Math.round(parseInt(c3) / 1271);
+  let c4 = tablecode[3];
+  let c5 = tablecode[4];
+  let c6 = tablecode[5];
+  let c7 = tablecode[6];
+  let c8 = tablecode[7];
+  let c9 = tablecode[8];
+  let c10 = tablecode[9];
+  let ovr1 = parseInt(c1) / 1432
+  let ovr2 = parseInt(c2) / 1432
+  let ovr3 = parseInt(c3) / 1432
+  let ovr4 = parseInt(c4) / 1432
+  let ovr5 = parseInt(c5) / 909320
+  let ovr6 = parseInt(c6) / 909320
+  let ovr7 = parseInt(c7) / 1432
+  let ovr8 = parseInt(c8) / 1432
+  let ovr9 = parseInt(c9) / 1432
+  let ovr10 = parseInt(c10) / 1432
+  for(let i = 0; i < tablecode.length; i++){
+    let elem = tablecode[i]
+    let checked = parseInt(elem) / 1432
+    if(checked % 1 != 0){
+      changeElementText('loadcodest','INVALID CODE')
+      return;
+    }
+  }
+  setClicks(ovr1)
+  clickers = ovr2;
+  cperclick = ovr3;
+  workers = ovr4;
+  upg_x2clickers = ovr5;
+  upg_x2workers = ovr6;
+  curupgrade = ovr7;
+  clickercost = ovr8;
+  cperclickcost = ovr9;
+  workercost = ovr10;
+  changeElementText('loadcodest','CODE LOADED')
+  updateshoptext()
 }
 
 function ticker() {
