@@ -266,7 +266,6 @@ function ticker() {
   }
 }
 function mticker(){
-  console.log("ms")
   if(workers >= 1 && curupgrade == 0 && upg_x2workers == 0){
     console.log('WORKER')
     curupgrade = 2
