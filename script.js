@@ -1,8 +1,4 @@
-function updateshoptext(){
-  changeElementText('workerst','Worker (makes 1 autoclicker per 10 seconds): '+workercost+' Clicks')
-  changeElementText('clickerst','Autoclicker: ' + clickercost + ' Clicks')
-  changeElementText('cperclickst','+1 Clicks Per Click: ' + cperclickcost + ' Clicks')
-}
+
   // Vars
   let randrush = 0;
   let rush = 0;
@@ -16,26 +12,174 @@ function updateshoptext(){
   let curupgrade = 1;
   let workercost = 500;
   let workers = 0;
+  let saving = false;
+  let deb = false;
+  let pickedrands = [];
   // Upgrade Vars
-  let upg_x2clickers = false;
-  let upg_x2workers = false;
+  let upg_x2clickers = 0;
+  let upg_x2workers = 0;
 // Keypress
-document.addEventListener("keypress", function onEvent(event) {
+document.addEventListener("keyup", function onEvent(event) {
     if (event.key === "z") {
-        click(cperclick)
+      clickbtn()
     }
 });
+// Window Events
+window.addEventListener('load', function() {
+  setTimeout(function(){
+    load()
+    updateshoptext()
+    saving = true
+  },10)
+})
 // Functions
-function changeClicks(amt){
+
+function clickbtn() {
+  debounce(function(){
+    click(cperclick)
+  },25)
+}
+
+function debounce(func,delay){
+  if (deb == false){
+    deb = true
+    func();
+    setTimeout(function(){
+      deb = false
+    },delay)
+  }
+} 
+
+function runinrandomorder(table){
+  let stopifnotwork = 0;
+  let run_next = true
+  while (pickedrands.length != table.length){
+    stopifnotwork++
+    if (stopifnotwork == 10000){
+      console.log('broken')
+      return;
+    }
+    let rand = randInt(table.length - 1)
+    for (let i = 0; i < pickedrands.length; i++){
+      if (pickedrands[i] == rand){
+        run_next = false
+      }
+    }
+    if (run_next == true){
+      let runfunc = table[rand];
+      runfunc();
+      pickedrands.push(rand);
+    } else {
+      run_next = true
+    }
+  }
+  pickedrands = [];
+}
+
+function save() {
+  localStorage.setItem('3JDO9JS8RMM27', EnumDataUnresponsive(clicks));
+  localStorage.setItem('9BNS55FS8UH66', EnumDataUnresponsive(clickers));
+  localStorage.setItem('I93M2WR6UNP74', EnumDataUnresponsive(clickercost));
+  localStorage.setItem('8949JfmcjJWU5', EnumDataUnresponsive(cperclick));
+  localStorage.setItem('9BN54Jw9MM384', EnumDataUnresponsive(cperclickcost));
+  localStorage.setItem('IIOW93N3849N8', EnumDataUnresponsive(workers));
+  localStorage.setItem('83nmJW93KK5Ns', EnumDataUnresponsive(workercost));
+  localStorage.setItem('3489MNd9njdrE', EnumDataUnresponsive(curupgrade));
+  localStorage.setItem('BOOL39JWmWI98', upg_x2clickers);
+  localStorage.setItem('BOOL38Md9Mew3', upg_x2workers);
+}
+
+function load() {
+  if (localStorage.getItem('3JDO9JS8RMM27') !== null) {
+    clicks = FixDataUnresponsive(localStorage.getItem('3JDO9JS8RMM27'))
+  }
+  
+  if (localStorage.getItem('9BNS55FS8UH66') !== null) {
+    clickers = FixDataUnresponsive(localStorage.getItem('9BNS55FS8UH66'))
+  }
+  
+  if (localStorage.getItem('I93M2WR6UNP74') !== null) {
+    clickercost = FixDataUnresponsive(localStorage.getItem('I93M2WR6UNP74'))
+  }
+  
+  if (localStorage.getItem('8949JfmcjJWU5') !== null) {
+    cperclick = FixDataUnresponsive(localStorage.getItem('8949JfmcjJWU5'))
+  }
+  
+  if (localStorage.getItem('9BN54Jw9MM384') !== null) {
+    cperclickcost = FixDataUnresponsive(localStorage.getItem('9BN54Jw9MM384'))
+  }
+
+  if (localStorage.getItem('IIOW93N3849N8') !== null) {
+    workers = FixDataUnresponsive(localStorage.getItem('IIOW93N3849N8'))
+  }
+
+  if (localStorage.getItem('83nmJW93KK5Ns') !== null) {
+    workercost = FixDataUnresponsive(localStorage.getItem('83nmJW93KK5Ns'))
+  }
+
+  if (localStorage.getItem('3489MNd9njdrE') !== null) {
+    curupgrade = FixDataUnresponsive(localStorage.getItem('3489MNd9njdrE'))
+  }
+
+  if (localStorage.getItem('BOOL39JWmWI98') !== null) {
+    upg_x2clickers = localStorage.getItem('BOOL39JWmWI98')
+  }
+
+  if (localStorage.getItem('BOOL38Md9Mew3') !== null) {
+    upg_x2workers = localStorage.getItem('BOOL38Md9Mew3')
+  }
+  setTimeout(function(){
+    updateshoptext()
+  },1000)
+}
+
+function EnumDataUnresponsive(error) {
+  return parseInt(error) * 4814.2845012
+}
+
+function FixDataUnresponsive(error) {
+  return Math.round(parseInt(error) / 4814.2845012)
+}
+
+function updateshoptext() {
+  changeElementText('workerst','Worker (makes 1 autoclicker per 10 seconds): '+workercost+' Clicks')
+  changeElementText('clickerst','Autoclicker: ' + clickercost + ' Clicks')
+  changeElementText('cperclickst','+1 Clicks Per Click: ' + cperclickcost + ' Clicks')
+  if (curupgrade == 1) {
+    changeElementText('upgrade', 'Make Autoclickers 2x More Efficient: 400 Clicks')
+  }
+  if (curupgrade == 0) {
+    changeElementText('upgrade', 'No Upgrades Yet!')
+  }
+  if (curupgrade == 2) {
+    changeElementText('upgrade', 'x2 Worker Productivity: 7500 Clicks')
+  }
+  if(workers >= 1 && curupgrade == 0 && upg_x2workers == 0){
+    console.log('WORKER')
+    curupgrade = 2
+    changeElementText('upgrade','x2 Worker Productivity: 7500 Clicks')
+  }
+}
+
+function randInt(max){
+  return Math.floor(Math.random() * (max + 1));
+}
+
+function changeClicks(amt) {
   clicks += amt;
   changeElementText('clickscounter', 'Clicks: ' + clicks)
 }
-function setClicks(amt){
+function setClicks(amt) {
   clicks = amt;
   changeElementText('clickscounter', 'Clicks: ' + clicks)
 }
-function resetgame(){
-  window.location.reload();
+function resetgame() {
+  saving = false
+  localStorage.clear();
+  setTimeout(function() {
+    window.location.reload();
+  },1000)
 }
 function changeElementText(id,text){
   document.getElementById(id).innerHTML = text
@@ -47,39 +191,39 @@ function click(amt) {
   }
 };
 function buy(item) {
-  if(item == 'clicker'){
-    if(clicks >= clickercost){
+  if (item == 'clicker') {
+    if (clicks >= clickercost) {
       changeClicks(-clickercost)
       clickers += 1;
       clickercost = Math.round(clickercost*1.5)
       changeElementText('clickerst','Autoclicker: ' + clickercost + ' Clicks')
     }
-  } else if(item == 'cperclick'){
-    if(clicks >= cperclickcost) {
+  } else if (item == 'cperclick') {
+    if (clicks >= cperclickcost) {
       changeClicks(-cperclickcost)
       cperclick += 1;
       cperclickcost = Math.round(cperclickcost*1.5)
       changeElementText('cperclickst','+1 Clicks Per Click: ' + cperclickcost + ' Clicks')
     }
-  } else if(item == 'crupgrade'){
-    if(curupgrade == 1){
-      if(clicks >= 400){
+  } else if (item == 'crupgrade') {
+    if (curupgrade == 1){
+      if (clicks >= 400){
         changeClicks(-400)
-        upg_x2clickers = true
+        upg_x2clickers = 1
         curupgrade = 0
         changeElementText('upgrade','No Upgrades Yet!')
       }
-    } else if(curupgrade == 2){
-      if(clicks >= 7500){
+    } else if (curupgrade == 2) {
+      if (clicks >= 7500){
         changeClicks(-7500)
-        upg_x2workers = true
+        upg_x2workers = 1
         curupgrade = 0
         changeElementText('upgrade','No Upgrades Yet!')
       }
     }
   }
-  if(item == 'worker'){
-    if(clicks >= workercost){
+  if (item == 'worker') {
+    if (clicks >= workercost) {
       changeClicks(-workercost)
       workers += 1
       workercost = Math.round(workercost*1.5)
@@ -88,92 +232,21 @@ function buy(item) {
   }
 }
 
-function save(){
-  let num1 = clicks * 1432
-  let reg1 = num1.toString() + '|';
-  let num2 = clickers * 1432
-  let reg2 = num2.toString() + '|';
-  let num3 = cperclick * 1432
-  let reg3 = num3.toString() + '|';
-  let num4 = workers * 1432
-  let reg4 = num4.toString() + '|';
-  let num5 = upg_x2clickers * 909320
-  let reg5 = num5.toString() + '|';
-  let num6 = upg_x2workers * 909320
-  let reg6 = num6.toString() + '|';
-  let num7 = curupgrade * 909320
-  let reg7 = num7.toString() + '|';
-  let num8 = clickercost * 1432
-  let reg8 = num8.toString() + '|';
-  let num9 = cperclickcost * 1432
-  let reg9 = num9.toString() + '|';
-  let num10 = workercost * 1432
-  let reg10 = num10.toString();
-  let savecode = reg1 + reg2 + reg3 + reg4 + reg5 + reg6 + reg7 + reg8 + reg9 + reg10;
-  changeElementText('savecode',savecode);
-}
-
-function load(){
-  let code = document.getElementById('inputload').value;
-  console.log(code)
-  let tablecode = code.split('|');
-  let c1 = tablecode[0];
-  let c2 = tablecode[1];
-  let c3 = tablecode[2];
-  let c4 = tablecode[3];
-  let c5 = tablecode[4];
-  let c6 = tablecode[5];
-  let c7 = tablecode[6];
-  let c8 = tablecode[7];
-  let c9 = tablecode[8];
-  let c10 = tablecode[9];
-  let ovr1 = parseInt(c1) / 1432
-  let ovr2 = parseInt(c2) / 1432
-  let ovr3 = parseInt(c3) / 1432
-  let ovr4 = parseInt(c4) / 1432
-  let ovr5 = parseInt(c5) / 909320
-  let ovr6 = parseInt(c6) / 909320
-  let ovr7 = parseInt(c7) / 1432
-  let ovr8 = parseInt(c8) / 1432
-  let ovr9 = parseInt(c9) / 1432
-  let ovr10 = parseInt(c10) / 1432
-  for(let i = 0; i < tablecode.length; i++){
-    let elem = tablecode[i]
-    let checked = parseInt(elem) / 1432
-    if(checked % 1 != 0){
-      changeElementText('loadcodest','INVALID CODE')
-      return;
-    }
-  }
-  setClicks(ovr1)
-  clickers = ovr2;
-  cperclick = ovr3;
-  workers = ovr4;
-  upg_x2clickers = ovr5;
-  upg_x2workers = ovr6;
-  curupgrade = ovr7;
-  clickercost = ovr8;
-  cperclickcost = ovr9;
-  workercost = ovr10;
-  changeElementText('loadcodest','CODE LOADED')
-  updateshoptext()
-}
-
 function ticker() {
-  if(tentick == 10){
+  if (tentick == 10) {
     tentick = 0;
     clickers += workers
-    if(upg_x2workers == true){
+    if (upg_x2workers == true) {
       clickers += workers
     }
-    if(minutes == 6){
-      if(rush == 0){
-        randrush = Math.random(1,5)
+    if (minutes == 6) {
+      if (rush == 0) {
+        randrush = randInt(1,5)
       } else {
         rush = 0;
         changeElementText('isrush','x2 Rush: None')
       }
-      if(randrush == 5){
+      if (randrush == 5) {
         rush = 1;
         changeElementText('isrush','x2 Rush: Active')
       }
@@ -185,12 +258,17 @@ function ticker() {
     tentick += 1;
   }
   click(clickers)
-  if(upg_x2clickers == true){
+  if (upg_x2clickers == true) {
     click(clickers)
+  }
+  if (saving == true){
+    save()
   }
 }
 function mticker(){
-  if(workers >= 1 && curupgrade == 0 && upg_x2workers == false){
+  console.log("ms")
+  if(workers >= 1 && curupgrade == 0 && upg_x2workers == 0){
+    console.log('WORKER')
     curupgrade = 2
     changeElementText('upgrade','x2 Worker Productivity: 7500 Clicks')
   }
