@@ -15,32 +15,9 @@
 </head>
 
 <body>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAtNekgMvjTRhULFGhADoITgAXA51TBLlE",
-    authDomain: "gdffew-bc88d.firebaseapp.com",
-    projectId: "gdffew-bc88d",
-    storageBucket: "gdffew-bc88d.appspot.com",
-    messagingSenderId: "719177783697",
-    appId: "1:719177783697:web:bc493b4b633ed3c181a230",
-    measurementId: "G-LHXGC3FBKZ"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
   <script src="script.js"></script>
-  <p class='nbgtxt' id='clickscounter'>Clicks: 0</p>
-  <img src='wjww.webp' class='img' onclick="window.click(cperclick)"> <button class='olayimg' onclick="window.click(cperclick)">Click</button>
+  <h1 class='nbgtxt' id='clickscounter'>Clicks: 0</h1>
+  <img src='wjww.webp' class='img' onclick="window.clickbtn()"> <button class='olayimg' onclick="window.clickbtn()">Click</button>
   <p class='nbgtxt'>You can press z to click.</p>
   <h2 class='nbgtxt'>𝐒𝐡𝐨𝐩</h2>
   <p id='clickerst' class='nbgtxt'>Autoclicker: 20 Clicks</p>
@@ -57,14 +34,6 @@
   <p id='isrush' class='nbgtxt'>x2 Rush: None</p>
   <p id='clickers' class='nbgtxt'>Autoclickers: 0</p>
   <p id='workers' class='nbgtxt'>Workers: 0</p>
-  <img src='wjww.webp' class='img' onclick="window.save()"> <button class='saveolayimg' onclick="window.save()">Save</button>
-  <p id='savecode' class='nbgtxt'>Save Code</p>
-  <div></div>
-  <img src='wjww.webp' class='img' onclick="window.load()"> <button class='saveolayimg' onclick="window.load()">Load</button>
-  <div></div>
-  <p id='loadcodest' class='nbgtxt'>Insert Code:</p>
-  <div></div>
-  <input type='text' id='inputload'>
   <div></div>
   <img src='wjww.webp' class='imgrs' onclick="window.resetgame()"> <button class='olayimgrs' onclick="window.resetgame()">Reset Game</button>
 </body>
